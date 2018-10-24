@@ -14,6 +14,7 @@ class ProductoController extends SecuredController
   private $model;
   private $modelCategoria;
   private $Titulo;
+  private $sesion;
 
   function __construct()
   {
@@ -22,19 +23,24 @@ class ProductoController extends SecuredController
     $this->model = new ProductoModel();
     $this->modelCategoria = new CategoriaModel();
     $this->Titulo = "Lista de Ropa";
+    if(isset($_SESSION["User"])){
+        $this->sesion =true;
+        }  else {
+          $this->sesion=false;
+        }
   }
 
   function ProductosTodos(){
     $Productos = $this->model->GetProductos();
     $Categorias=$this->modelCategoria->GetCategorias();
-    $this->view->Mostrar($this->Titulo, $Productos,$Categorias);
+    $this->view->Mostrar($this->Titulo, $Productos,$Categorias,$this->sesion);
   }
   function ProductoIndividual($param){
     $id = $param[0];
       $tit=$this->Titulo='Producto Individual';
       $Producto = $this->model->GetProducto($id);
     //  header(HOME);
-      $this->view->MostrarProducto($tit, $Producto);
+      $this->view->MostrarProducto($tit, $Producto,$this->sesion);
 
   }
   public function CategoriaProductos($param)
@@ -43,7 +49,7 @@ class ProductoController extends SecuredController
     $tit=$this->Titulo='Producto por Categoria';
 
   $Productos = $this->model->GetProductodeCategoria($id);
-  $this->view->MostrarProductoxCat($tit,$Productos);
+  $this->view->MostrarProductoxCat($tit,$Productos,$this->sesion);
   }
 
   function BorrarProducto($param){
@@ -54,7 +60,7 @@ class ProductoController extends SecuredController
       $id_producto = $param[0];
       $Producto = $this->model->GetProducto($id_producto);
       $Categorias=$this->modelCategoria->GetCategorias();
-      $this->view->editProducto("Editar Producto", $Producto,$Categorias);
+      $this->view->editProducto("Editar Producto", $Producto,$Categorias,$this->sesion);
   }
 
   function guardarProducto($param){

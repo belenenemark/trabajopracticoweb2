@@ -4,7 +4,6 @@
 require_once "config/ConfigApp.php";
 require_once "controller\CategoriaController.php";
  require_once "controller\ProductoController.php";
- require_once "controller\UserController.php";
 require_once "controller\LoginController.php";
 require_once "controller\RegistrarseController.php";
 require_once "controller\SecuredController.php";
@@ -26,7 +25,7 @@ if(isset($_GET['action'])){
     $action = $urlData[ConfigApp::$ACTION]; //home
     if(array_key_exists($action,ConfigApp::$ACTIONS)){
         $params = $urlData[ConfigApp::$PARAMS];
-        $action = explode('#',ConfigApp::$ACTIONS[$action]); //Array[0] -> TareasController [1] -> BorrarTarea
+        $action = explode('#',ConfigApp::$ACTIONS[$action]); 
         $controller =  new $action[0]();
         $metodo = $action[1];
         if(isset($params) &&  $params != null){

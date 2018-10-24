@@ -10,6 +10,7 @@ class LoginController
   private $view;
   private $model;
   private $Titulo;
+  private $sesion;
 
 
   function __construct()
@@ -18,19 +19,23 @@ class LoginController
     $this->view = new LoginView();
     $this->model = new UsuarioModel();
     $this->Titulo = "Login";
+    if(isset($_SESSION["User"])){
+        $this->sesion =true;
+        }  else {
+          $this->sesion=false;
+        }
 
   }
 
   function login(){
 
-    $this->view->mostrarLogin();
+    $this->view->mostrarLogin(' ', $this->sesion);
 
   }
 
   function logout(){
     session_start();
     session_destroy();
-    $sesion=false;
     header(HOME);
   }
 
@@ -38,7 +43,7 @@ class LoginController
       $userData = $_POST["usuarioId"];
       $pass = $_POST["passwordId"];
       $dbUser = $this->model->GetUser($userData);
-      
+
 
       if( (isset($dbUser))&&($dbUser!=NULL )){
 
@@ -48,13 +53,13 @@ class LoginController
 
               header(HOME);
           }else{
-            $this->view->mostrarLogin("Contraseña invalida");
+            $this->view->mostrarLogin("Contraseña invalida",$this->sesion);
 
           }
 
       }else{
         //No existe el usario
-        $this->view->mostrarLogin("No existe el usuario");
+        $this->view->mostrarLogin("No existe el usuario",$this->sesion);
       }
 
   }

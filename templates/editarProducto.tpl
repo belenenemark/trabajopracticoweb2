@@ -22,7 +22,7 @@
 <select class="custom-select" id="inputGroupSelect01" name="categoria">
 
 
-<option selected >Elija Categoria</option>
+<option selected value="{$Producto["idcategoria"]}" >Elija Categoria</option>
 {foreach from=$Categorias item=categoria}
 <option value="{$categoria['idcategoria']}">{$categoria['indumentaria']}</option>
 {/foreach}

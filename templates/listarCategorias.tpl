@@ -19,6 +19,8 @@
             <thead>
               <tr>
                 <th scope="col">Nombre</th>
+                <th scope="col">Borrar</th>
+                <th scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -26,10 +28,11 @@
               {if $categoria['tipo_publico'] == 1}
               <tr>
 
-                <td>{$categoria['idcategoria']}
-                  {if $Logeado }<a href="borrarCategoria/{$categoria['idcategoria']}">BORRAR</a> | <a href="editarCategoria/{$categoria['idcategoria']}">EDITAR</a>{/if}
-                </td>
+
                 <td> <a href="CategoriaProductos/{$categoria['idcategoria']}">{$categoria['indumentaria']}</a></td>
+                {if $Logeado }
+                <td><a href="borrarCategoria/{$categoria['idcategoria']}">BORRAR</a></td>
+                <td> <a href="editarCategoria/{$categoria['idcategoria']}">EDITAR</a>{/if}</td>
 
 
 

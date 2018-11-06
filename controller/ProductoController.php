@@ -23,6 +23,7 @@ class ProductoController extends SecuredController
     $this->model = new ProductoModel();
     $this->modelCategoria = new CategoriaModel();
     $this->Titulo = "Lista de Ropa";
+    $this->esta=false;
     if(isset($_SESSION["User"])){
         $this->sesion =true;
         }  else {
@@ -39,7 +40,10 @@ class ProductoController extends SecuredController
       $id = $param[0];
         $tit=$this->Titulo='Producto Individual';
         $Producto = $this->model->GetProducto($id);
+        $this->esta=true;
+
         $this->view->MostrarProducto($tit, $Producto,$this->sesion);
+
 
 
   }

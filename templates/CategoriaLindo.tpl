@@ -11,20 +11,27 @@
 
 
           <h2><a href="CategoriaProductos/">Filtrar todos los items</a> </h2>
+          <div class="banner">
 
 
+          <div class="container">
 
 
-              {foreach from=$Categorias item=categoria}
-              <div class="row">
-              <div class=" col-md-offset-4 col-md-8">
-					           <div class="banner_item align-items-center" style="background-image:url(images/banner_3.jpg)">
+          <div class="row">
+
+
+            {foreach from=$Categorias item=categoria}
+            <div class="col-md-4">
+              <div class="banner_item align-items-center" style="background-image:url(images/banner_1.jpg)">
 						                 <div class="banner_category">
 							                        <a href="CategoriaProductos/{$categoria['idcategoria']}">{$categoria['indumentaria']}</a>
-						                </div>
+						   </div>
               </div>
 
             {/foreach}
+            </div>
+            </div>
+            </div>
 
         </div>
       </div>

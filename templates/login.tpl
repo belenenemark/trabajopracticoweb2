@@ -1,5 +1,10 @@
 {include file="header.tpl"}
-<div class="col-sm-offset-2 col-sm-8">
+<div class="row">
+
+
+<div class="login-block">
+
+<div class=" col-sm-6">
     <h1>{$Titulo}</h1>
     <form method="post" action="verificarLogin">
       <div class="form-group">
@@ -17,6 +22,12 @@
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
     </div>
+
   </div>
+  <div class="col-sm-6">
+    <img src="images/banner_1.jpg" alt="" class="imglog">
+  </div>
+  </div>
+
 
 {include file="footer.tpl"}

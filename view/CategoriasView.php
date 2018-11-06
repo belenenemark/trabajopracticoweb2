@@ -8,7 +8,7 @@ class CategoriasView
 {
 
   private $Smarty;
-  
+
 
   function __construct()
   {
@@ -23,6 +23,13 @@ class CategoriasView
     $this->Smarty->assign('Categorias',$Categorias);
     $this->Smarty->assign('Logeado',$sesion);
     $this->Smarty->display('templates/listarCategorias.tpl');
+  }
+  function MostrarPublico($Titulo,$Categorias,$sesion){
+
+    $this->Smarty->assign('Titulo',$Titulo);
+    $this->Smarty->assign('Categorias',$Categorias);
+    $this->Smarty->assign('Logeado',$sesion);
+    $this->Smarty->display('templates/CategoriaLindo.tpl');
   }
   function editCategoria($Titulo,$Categoria,$sesion){
 

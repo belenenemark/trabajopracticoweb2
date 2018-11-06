@@ -36,11 +36,11 @@ class ProductoController extends SecuredController
     $this->view->Mostrar($this->Titulo, $Productos,$Categorias,$this->sesion);
   }
   function ProductoIndividual($param){
-    $id = $param[0];
-      $tit=$this->Titulo='Producto Individual';
-      $Producto = $this->model->GetProducto($id);
-    //  header(HOME);
-      $this->view->MostrarProducto($tit, $Producto,$this->sesion);
+      $id = $param[0];
+        $tit=$this->Titulo='Producto Individual';
+        $Producto = $this->model->GetProducto($id);
+        $this->view->MostrarProducto($tit, $Producto,$this->sesion);
+
 
   }
   public function CategoriaProductos($param)
@@ -53,30 +53,43 @@ class ProductoController extends SecuredController
   }
 
   function BorrarProducto($param){
-    $this->model->BorrarProducto($param[0]);
+    if($this->sesion){
+      $this->model->BorrarProducto($param[0]);
+
+    }
     header(PROD);
+
   }
   function editarProducto($param){
+    if($this->sesion){
       $id_producto = $param[0];
       $Producto = $this->model->GetProducto($id_producto);
       $Categorias=$this->modelCategoria->GetCategorias();
       $this->view->editProducto("Editar Producto", $Producto,$Categorias,$this->sesion);
+    }
+
   }
 
   function guardarProducto($param){
-    $id = $_POST["idProducto"];
-    $nombre = $_POST["nombre"];
-    $precio = $_POST["precio"];
-    $idcategoria = $_POST["categoria"];
-    $this->model->EditarProducto($id,$nombre,$precio,$idcategoria);
+    if($this->sesion){
+      $id = $_POST["idProducto"];
+      $nombre = $_POST["nombre"];
+      $precio = $_POST["precio"];
+      $idcategoria = $_POST["categoria"];
+      $this->model->EditarProducto($id,$nombre,$precio,$idcategoria);
+    }
+
     header(PROD);
   }
   function agregarProducto(){
-    $nombre = $_POST["nombre"];
-    $precio = $_POST["precio"];
-    $categoria = $_POST["categoria"];
+    if($this->sesion){
+      $nombre = $_POST["nombre"];
+      $precio = $_POST["precio"];
+      $categoria = $_POST["categoria"];
 
-    $this->model->InsertarProducto($nombre,$precio,$categoria);
+      $this->model->InsertarProducto($nombre,$precio,$categoria);
+    }
+
 
     header(PROD);
   }

@@ -1,4 +1,14 @@
 {include file="header.tpl"}
+<!-- Slider -->
+
+<div class="main_slider" style="background-image:url(images/banner_55.jpg)">
+  <div class="container fill_height">
+    <div class="row align-items-center fill_height">
+
+    </div>
+  </div>
+</div>
+
 
 
 <div class="col-sm-offset-2 col-sm-8">
@@ -8,7 +18,6 @@
           <table class="table table-sm">
             <thead>
               <tr>
-                <th scope="col">Numero de Categoria</th>
                 <th scope="col">Nombre</th>
               </tr>
             </thead>

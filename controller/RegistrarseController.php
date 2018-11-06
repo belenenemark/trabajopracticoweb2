@@ -30,7 +30,6 @@ class RegistrarseController
 
   function verificarSignIn(){
       $user = filter_var(strtolower($_POST['usuarioId']), FILTER_SANITIZE_STRING);
-
       $pass = $_POST["passwordId"];
       $pass2 = $_POST["passwordId2"];
       $dbUser = $this->model->getUser($user);

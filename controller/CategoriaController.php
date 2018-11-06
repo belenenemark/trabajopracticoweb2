@@ -17,7 +17,7 @@ class CategoriaController extends SecuredController
     parent::__construct();
    $this->view = new CategoriasView();
    $this->model = new CategoriaModel();
-   $this->Titulo = "Lista de Categorias";
+   $this->Titulo = "Pecas Tandil";
    if(isset($_SESSION["User"])){
        $this->sesion =true;
        }  else {
@@ -28,31 +28,49 @@ class CategoriaController extends SecuredController
   function Home(){
 
       $Categorias = $this->model->GetCategorias();
-      $this->view->Mostrar($this->Titulo, $Categorias,$this->sesion);
+      if($this->sesion){
+        $this->view->Mostrar($this->Titulo, $Categorias,$this->sesion);
+      }else {
+        $this->view->MostrarPublico($this->Titulo,$Categorias,$this->sesion );
+      }
+
   }
   function editarCategoria($param){
+    if($this->sesion){
+
+
     $id_categoria = $param[0];
 
     $Categoria = $this->model->GetCategoria($id_categoria);
     $this->view->editCategoria("Editar Categoria",$Categoria,$this->sesion);
   }
+  }
 
   function borrarCategoria($param){
-    $this->model->BorrarCategoria($param[0]);
-    header(HOME);
+    if($this->sesion){
+      $this->model->BorrarCategoria($param[0]);
+      header(HOME);
+    }
+
    }
    function agregarCategoria(){
-    $nombre = $_POST["categoria"];
-    $this->model->InsertarCategoria($nombre);
+     if($this->sesion){
+       $nombre = $_POST["categoria"];
+       $this->model->InsertarCategoria($nombre);
+     }
+
 
     header(HOME);
   }
   function guardeCategoria($param){
-    $idcategoria = $_POST["idCategoria"];
-    $indumentaria = $_POST["indumentaria"];
+    if($this->sesion){
+      $idcategoria = $_POST["idCategoria"];
+      $indumentaria = $_POST["indumentaria"];
 
-    $this->model->EditarCategoria($indumentaria,$idcategoria);
-    header(HOME);
+      $this->model->EditarCategoria($indumentaria,$idcategoria);
+      header(HOME);
+    }
+
   }
 
 }

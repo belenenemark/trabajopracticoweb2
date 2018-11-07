@@ -40,7 +40,7 @@ class ProductoController extends SecuredController
       $id = $param[0];
         $tit=$this->Titulo='Producto Individual';
         $Producto = $this->model->GetProducto($id);
-        $this->esta=true;
+      
 
         $this->view->MostrarProducto($tit, $Producto,$this->sesion);
 

@@ -8,7 +8,6 @@
               <tr>
                 <th scope="col">Nombre de Producto</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Id Producto</th>
                 <th scope="col">Id Categoria</th>
               </tr>
             </thead>
@@ -18,7 +17,6 @@
               <td>{$Producto['nombre']}</td>
               <td>{$Producto['precio']}</td>
               <td>{$Producto['idcategoria']}</td>
-              <td>{$Producto['idproducto']}</td>
             </tr>
 
 

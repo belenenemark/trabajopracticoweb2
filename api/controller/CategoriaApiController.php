@@ -2,7 +2,7 @@
 
 
 require_once 'Api.php';
-require_once '../../model/CategoriasModel.php';
+require_once './../model/CategoriaModel.php';
 class CategoriaApiController extends Api
 {
   private $model;
@@ -10,12 +10,18 @@ class CategoriaApiController extends Api
   function __construct()
   {
     parent::__construct();
-    $this->model = new CategoriasModel();
+    $this->model = new CategoriaModel();
   }
 
-  function GetCategorias()
+  function GetCategorias($param=null)
   {
-    $data = $this->model->GetCategorias();
+    if(isset($param)){
+      $id_categoria = $param[0];
+      $data = $this->model->GetCategoria($id_categoria);
+
+    }else{
+      $data = $this->model->GetCategorias();
+    }
     if(isset($data)){
       return $this->json_response($data, 200);
     }else{

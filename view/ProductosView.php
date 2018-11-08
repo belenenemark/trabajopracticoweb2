@@ -14,12 +14,17 @@ class ProductosView
 
 
   }
+  function prueba($tabla){
 
-  function Mostrar($Titulo, $Productos,$Categorias,$sesion){
+    $this->Smarty->assign('tabla',$tabla);
+    $this->Smarty->display('templates/prueba.tpl');
+
+  }
+
+  function Mostrar($Titulo, $Productos,$sesion){
 
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Productos',$Productos);
-    $this->Smarty->assign('Categorias',$Categorias);
     $this->Smarty->assign('Logeado',$sesion);
     $this->Smarty->display('templates/listarProductos.tpl');
   }

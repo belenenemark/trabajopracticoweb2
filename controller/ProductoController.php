@@ -12,7 +12,6 @@ class ProductoController extends SecuredController
 
   private $view;
   private $model;
-  private $modelCategoria;
   private $Titulo;
   private $sesion;
 
@@ -21,7 +20,6 @@ class ProductoController extends SecuredController
     parent::__construct();
     $this->view = new ProductosView();
     $this->model = new ProductoModel();
-    $this->modelCategoria = new CategoriaModel();
     $this->Titulo = "Lista de Ropa";
     $this->esta=false;
     if(isset($_SESSION["User"])){
@@ -30,17 +28,20 @@ class ProductoController extends SecuredController
           $this->sesion=false;
         }
   }
-
+function prueba(){
+$tabla=  $this->model->getCompleto();
+var_dump($tabla);
+$this->view->prueba($tabla);
+}
   function ProductosTodos(){
     $Productos = $this->model->GetProductos();
-    $Categorias=$this->modelCategoria->GetCategorias();
-    $this->view->Mostrar($this->Titulo, $Productos,$Categorias,$this->sesion);
+    $this->view->Mostrar($this->Titulo, $Productos,$this->sesion);
   }
   function ProductoIndividual($param){
       $id = $param[0];
         $tit=$this->Titulo='Producto Individual';
         $Producto = $this->model->GetProducto($id);
-      
+
 
         $this->view->MostrarProducto($tit, $Producto,$this->sesion);
 

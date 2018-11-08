@@ -13,7 +13,7 @@
             <tbody>
               {foreach from=$Productos item=producto}
               <tr>
-              <td>{$producto['idcategoria']}</td>
+              <td>{$producto['indumentaria']}</td>
 
 
               <td> <a href="ProductoIndividual/{$producto['idproducto']}"> {$producto['nombre']}</a>

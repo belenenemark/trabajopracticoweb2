@@ -15,14 +15,14 @@ class ProductoModel
   }
 
   function GetProductos(){
-    $sentencia = $this->db->prepare( "SELECT * from producto");
+    $sentencia=$this->db->prepare("SELECT producto.nombre,categoria.indumentaria,producto.idproducto from producto inner JOIN categoria on producto.idcategoria=categoria.idcategoria");
     $sentencia->execute();
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 
 
 function GetProducto($idproducto){
-  $sentencia = $this->db->prepare( "SELECT * from producto where idproducto=?");
+  $sentencia = $this->db->prepare( "SELECT producto.nombre,producto.precio,categoria.indumentaria,producto.idproducto from producto inner JOIN categoria on producto.idcategoria=categoria.idcategoria where idproducto=?");
   $sentencia->execute(array($idproducto));
   return $sentencia->fetch(PDO::FETCH_ASSOC);
 }
@@ -50,6 +50,12 @@ function InsertarProducto($nombre,$precio,$categoria){
     }
 
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+  }
+  function getCompleto(){
+    $sentencia=$this->db->prepare("SELECT producto.nombre,categoria.indumentaria,producto.idproducto from producto inner JOIN categoria on producto.idcategoria=categoria.idcategoria");
+    $sentencia->execute();
+    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
   }
 
 }

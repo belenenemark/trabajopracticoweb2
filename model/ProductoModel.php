@@ -26,15 +26,30 @@ function GetProducto($idproducto){
   $sentencia->execute(array($idproducto));
   return $sentencia->fetch(PDO::FETCH_ASSOC);
 }
-function InsertarProducto($nombre,$precio,$categoria){
+function GetImagenes($idproducto){
+  $sentencia=$this->db->prepare("SELECT * FROM imagenes where idproducto=?");
+  $sentencia->execute(array($idproducto));
+  return  $sentencia->fetchAll(PDO::FETCH_ASSOC);
+}
+function InsertarProducto($nombre,$precio,$categoria,$imagenes){
 
     $sentencia = $this->db->prepare("INSERT INTO producto (nombre, precio,idcategoria) VALUES(?,?,?)");
     $sentencia->execute(array($nombre,$precio,$categoria));
+    $idproducto=$this->db->lastInsertId();
+    $rutas = $this->subirImagenes($imagenes);
+    $sentencia_img=$this->db->prepare('INSERT INTO imagenes(idproducto,nombre) VALUES(?,?)');
+    foreach ($rutas as $ruta) {
+      $sentencia_img->execute([$idproducto,$ruta]);
+    }
   }
   function BorrarProducto($idproducto){
 
     $sentencia = $this->db->prepare( "DELETE from producto where idproducto=?");
     $sentencia->execute(array($idproducto));
+  }
+  function borrarImagen($id_image){
+    $sentencia= $this->db->prepare("DELETE FROM imagenes where id_image=?");
+    $sentencia->execute(array($id_image));
   }
   function EditarProducto($idproducto,$nombre,$precio,$categoria){
     $sentencia = $this->db->prepare( "UPDATE producto set nombre = ?, precio = ?, idcategoria = ? where idproducto=?");
@@ -57,6 +72,17 @@ function InsertarProducto($nombre,$precio,$categoria){
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
   }
+  private function subirImagenes($imagenes){
+   $rutas = [];
+   foreach ($imagenes as $imagen) {
+     $destino_final = 'images/' . uniqid() . '.jpg';
+     move_uploaded_file($imagen, $destino_final);
+     $rutas[]=$destino_final;
+   }
+   return $rutas;
+ }
+
+
 
 }
 

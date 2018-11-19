@@ -12,7 +12,7 @@ class ConfigApp
     public static $ACTION = 'action';
     public static $PARAMS = 'params';
     public static $ACTIONS = [
-      'prueba'=>'ProductoController#prueba',
+
       ''=> 'CategoriaController#Home',
       'home'=> 'CategoriaController#Home',
       'productos'=>'ProductoController#ProductosTodos',
@@ -31,6 +31,7 @@ class ConfigApp
       'editarCategoria'=>'CategoriaController#editarCategoria',
       'editeCategoria'=>'CategoriaController#guardeCategoria',
       'borrarCategoria'=>'CategoriaController#borrarCategoria',
+      'borrarImagen'=>'ProductoController#borrarImagen',
 
 
 

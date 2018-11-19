@@ -12,6 +12,7 @@ class ProductoController extends SecuredController
 
   private $view;
   private $model;
+  private $modelCat;
   private $Titulo;
   private $sesion;
 
@@ -20,6 +21,7 @@ class ProductoController extends SecuredController
     parent::__construct();
     $this->view = new ProductosView();
     $this->model = new ProductoModel();
+    $this->modelCat= new CategoriaModel();
     $this->Titulo = "Lista de Ropa";
     $this->esta=false;
     if(isset($_SESSION["User"])){
@@ -28,22 +30,19 @@ class ProductoController extends SecuredController
           $this->sesion=false;
         }
   }
-function prueba(){
-$tabla=  $this->model->getCompleto();
-var_dump($tabla);
-$this->view->prueba($tabla);
-}
+
   function ProductosTodos(){
     $Productos = $this->model->GetProductos();
-    $this->view->Mostrar($this->Titulo, $Productos,$this->sesion);
+    $Categorias=$this->modelCat->GetCategorias();
+    $this->view->Mostrar($this->Titulo, $Productos,$this->sesion,$Categorias);
   }
   function ProductoIndividual($param){
       $id = $param[0];
         $tit=$this->Titulo='Producto Individual';
         $Producto = $this->model->GetProducto($id);
+        $imagenes=$this->model->GetImagenes($id);
 
-
-        $this->view->MostrarProducto($tit, $Producto,$this->sesion);
+        $this->view->MostrarProducto($tit, $Producto,$this->sesion,$imagenes);
 
 
 
@@ -65,11 +64,17 @@ $this->view->prueba($tabla);
     header(PROD);
 
   }
+  function borrarImagen($param){
+    if($this->sesion){
+      $this->model->borrarImagen($param[0]);
+    }
+    header(PROD);
+  }
   function editarProducto($param){
     if($this->sesion){
       $id_producto = $param[0];
       $Producto = $this->model->GetProducto($id_producto);
-      $Categorias=$this->modelCategoria->GetCategorias();
+      $Categorias=$this->modelCat->GetCategorias();
       $this->view->editProducto("Editar Producto", $Producto,$Categorias,$this->sesion);
     }
 
@@ -91,15 +96,49 @@ $this->view->prueba($tabla);
       $nombre = $_POST["nombre"];
       $precio = $_POST["precio"];
       $categoria = $_POST["categoria"];
+      $rutas=$_FILES['imagenes']['name'];
+      if($this->sonJPG($rutas)){
+        $rutaTempImagenes=$_FILES['imagenes']['tmp_name'];
+        $this->model->InsertarProducto($nombre,$precio,$categoria,$rutaTempImagenes);
+        header(PROD);
+      }else {
+        $this->view->errorCarga("la imagen no fue cargada");
+      }
 
-      $this->model->InsertarProducto($nombre,$precio,$categoria);
     }
 
 
-    header(PROD);
+
+  }
+function create(){
+  $this->view->mostrarCrearImg();
+}
+function sonJPG($rutas){
+  foreach ($rutas as $ruta) {
+              $tamaño = strlen($ruta)-3;
+              $ext = substr($ruta, $tamaño);
+              if(($ext == "jpg") || ($ext == "png")){
+                $valor=true;
+              }
+
+  }
+  if($valor!=true){
+    $valor=false;
   }
 
+  return $valor;
 
+}
+function guardaimg(){
+
+  if($this->sonJPG($rutas)){
+    $rutaTempImagenes=$_FILES['imagenes']['tmp_name'];
+    $this->modelImg->guardarImg($rutaTempImagenes);
+    echo"fue exitoso";
+  }else{
+    echo "fracaso la carga";
+  }
+}
 }
 
 

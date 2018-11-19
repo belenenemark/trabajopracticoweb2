@@ -21,8 +21,17 @@
 
 
             </tbody>
+
           </table>
         </div>
+        {foreach from=$Imagenes item=imagen}
+        <div class="imagenesProd">
+          <img src="{$imagen['nombre']}" alt="">
+          {if $Logeado}
+            <a href="borrarImagen/{$imagen['id_image']}">Borrar Imagen</a>
+          {/if}
+        </div>
+        {/foreach}
     </div>
 
 </div>

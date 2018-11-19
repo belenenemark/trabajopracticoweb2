@@ -26,8 +26,8 @@
 
           {if $Logeado}
         <div class="container">
-          <h2>Formulario</h2>
-          <form method="post" action="agregar">
+          <h2>Agregar Producto</h2>
+          <form method="post" action="agregar" enctype="multipart/form-data">
             <div class="form-group">
               <label for="tituloForm">Nombre</label>
               <input type="text" class="form-control" id="nombre" name="nombre">
@@ -36,6 +36,10 @@
               <label for="descripcionForm">Precio</label>
               <input type="text" class="form-control" id="precio" name="precio" >
             </div>
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+                <input type="file" id="imagenes" name="imagenes[]" multiple>
+              </div>
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -47,7 +51,9 @@
                 {/foreach}
               </select>
             </div>
+
           </div>
+
             <button type="submit" class="btn btn-primary">guardar producto</button>
           </form>
         </div>

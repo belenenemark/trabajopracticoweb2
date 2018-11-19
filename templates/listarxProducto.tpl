@@ -8,8 +8,7 @@
               <tr>
                 <th scope="col">Nombre de Producto</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Id Producto</th>
-                <th scope="col">Id Categoria</th>
+                <th scope="col"> Categoria</th>
               </tr>
             </thead>
             <tbody>
@@ -17,14 +16,22 @@
               <tr>
               <td>{$Producto['nombre']}</td>
               <td>{$Producto['precio']}</td>
-              <td>{$Producto['idcategoria']}</td>
-              <td>{$Producto['idproducto']}</td>
+              <td>{$Producto['indumentaria']}</td>
             </tr>
 
 
             </tbody>
+
           </table>
         </div>
+        {foreach from=$Imagenes item=imagen}
+        <div class="imagenesProd">
+          <img src="{$imagen['nombre']}" alt="">
+          {if $Logeado}
+            <a href="borrarImagen/{$imagen['id_image']}">Borrar Imagen</a>
+          {/if}
+        </div>
+        {/foreach}
     </div>
 
 </div>

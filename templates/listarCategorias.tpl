@@ -1,4 +1,14 @@
 {include file="header.tpl"}
+<!-- Slider -->
+
+<div class="main_slider" style="background-image:url(images/banner_55.jpg)">
+  <div class="container fill_height">
+    <div class="row align-items-center fill_height">
+
+    </div>
+  </div>
+</div>
+
 
 
 <div class="col-sm-offset-2 col-sm-8">
@@ -8,8 +18,9 @@
           <table class="table table-sm">
             <thead>
               <tr>
-                <th scope="col">Numero de Categoria</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Borrar</th>
+                <th scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -17,10 +28,11 @@
               {if $categoria['tipo_publico'] == 1}
               <tr>
 
-                <td>{$categoria['idcategoria']}
-                  {if $Logeado }<a href="borrarCategoria/{$categoria['idcategoria']}">BORRAR</a> | <a href="editarCategoria/{$categoria['idcategoria']}">EDITAR</a>{/if}
-                </td>
+
                 <td> <a href="CategoriaProductos/{$categoria['idcategoria']}">{$categoria['indumentaria']}</a></td>
+                {if $Logeado }
+                <td><a href="borrarCategoria/{$categoria['idcategoria']}">BORRAR</a></td>
+                <td> <a href="editarCategoria/{$categoria['idcategoria']}">EDITAR</a>{/if}</td>
 
 
 

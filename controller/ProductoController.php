@@ -12,7 +12,7 @@ class ProductoController extends SecuredController
 
   private $view;
   private $model;
-  private $modelCategoria;
+  private $modelCat;
   private $Titulo;
   private $sesion;
 
@@ -21,8 +21,9 @@ class ProductoController extends SecuredController
     parent::__construct();
     $this->view = new ProductosView();
     $this->model = new ProductoModel();
-    $this->modelCategoria = new CategoriaModel();
+    $this->modelCat= new CategoriaModel();
     $this->Titulo = "Lista de Ropa";
+    $this->esta=false;
     if(isset($_SESSION["User"])){
         $this->sesion =true;
         }  else {
@@ -32,15 +33,18 @@ class ProductoController extends SecuredController
 
   function ProductosTodos(){
     $Productos = $this->model->GetProductos();
-    $Categorias=$this->modelCategoria->GetCategorias();
-    $this->view->Mostrar($this->Titulo, $Productos,$Categorias,$this->sesion);
+    $Categorias=$this->modelCat->GetCategorias();
+    $this->view->Mostrar($this->Titulo, $Productos,$this->sesion,$Categorias);
   }
   function ProductoIndividual($param){
-    $id = $param[0];
-      $tit=$this->Titulo='Producto Individual';
-      $Producto = $this->model->GetProducto($id);
-    //  header(HOME);
-      $this->view->MostrarProducto($tit, $Producto,$this->sesion);
+      $id = $param[0];
+        $tit=$this->Titulo='Producto Individual';
+        $Producto = $this->model->GetProducto($id);
+        $imagenes=$this->model->GetImagenes($id);
+
+        $this->view->MostrarProducto($tit, $Producto,$this->sesion,$imagenes);
+
+
 
   }
   public function CategoriaProductos($param)
@@ -53,35 +57,88 @@ class ProductoController extends SecuredController
   }
 
   function BorrarProducto($param){
-    $this->model->BorrarProducto($param[0]);
+    if($this->sesion){
+      $this->model->BorrarProducto($param[0]);
+
+    }
+    header(PROD);
+
+  }
+  function borrarImagen($param){
+    if($this->sesion){
+      $this->model->borrarImagen($param[0]);
+    }
     header(PROD);
   }
   function editarProducto($param){
+    if($this->sesion){
       $id_producto = $param[0];
       $Producto = $this->model->GetProducto($id_producto);
-      $Categorias=$this->modelCategoria->GetCategorias();
+      $Categorias=$this->modelCat->GetCategorias();
       $this->view->editProducto("Editar Producto", $Producto,$Categorias,$this->sesion);
+    }
+
   }
 
   function guardarProducto($param){
-    $id = $_POST["idProducto"];
-    $nombre = $_POST["nombre"];
-    $precio = $_POST["precio"];
-    $idcategoria = $_POST["categoria"];
-    $this->model->EditarProducto($id,$nombre,$precio,$idcategoria);
+    if($this->sesion){
+      $id = $_POST["idProducto"];
+      $nombre = $_POST["nombre"];
+      $precio = $_POST["precio"];
+      $idcategoria = $_POST["categoria"];
+      $this->model->EditarProducto($id,$nombre,$precio,$idcategoria);
+    }
+
     header(PROD);
   }
   function agregarProducto(){
-    $nombre = $_POST["nombre"];
-    $precio = $_POST["precio"];
-    $categoria = $_POST["categoria"];
+    if($this->sesion){
+      $nombre = $_POST["nombre"];
+      $precio = $_POST["precio"];
+      $categoria = $_POST["categoria"];
+      $rutas=$_FILES['imagenes']['name'];
+      if($this->sonJPG($rutas)){
+        $rutaTempImagenes=$_FILES['imagenes']['tmp_name'];
+        $this->model->InsertarProducto($nombre,$precio,$categoria,$rutaTempImagenes);
+        header(PROD);
+      }else {
+        $this->view->errorCarga("la imagen no fue cargada");
+      }
 
-    $this->model->InsertarProducto($nombre,$precio,$categoria);
+    }
 
-    header(PROD);
+
+
+  }
+function create(){
+  $this->view->mostrarCrearImg();
+}
+function sonJPG($rutas){
+  foreach ($rutas as $ruta) {
+              $tamaño = strlen($ruta)-3;
+              $ext = substr($ruta, $tamaño);
+              if(($ext == "jpg") || ($ext == "png")){
+                $valor=true;
+              }
+
+  }
+  if($valor!=true){
+    $valor=false;
   }
 
+  return $valor;
 
+}
+function guardaimg(){
+
+  if($this->sonJPG($rutas)){
+    $rutaTempImagenes=$_FILES['imagenes']['tmp_name'];
+    $this->modelImg->guardarImg($rutaTempImagenes);
+    echo"fue exitoso";
+  }else{
+    echo "fracaso la carga";
+  }
+}
 }
 
 

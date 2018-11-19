@@ -4,10 +4,11 @@
  */
 class Api
 {
+  protected $data;
 
   function __construct()
   {
-
+    $this->data= file_get_contents("php://input");
   }
 
   public function json_response($data, $status) {
@@ -18,10 +19,10 @@ class Api
 
   private function _requestStatus($code){
      $status = array(
-       200 => "OK",
+       200 => "OKas",
        404 => "Not found",
        500 => "Internal Server Error",
-       300 => "Task Not found"
+       300 => "Categoria no encontrada"
      );
      return ($status[$code])? $status[$code] : $status[500];
    }

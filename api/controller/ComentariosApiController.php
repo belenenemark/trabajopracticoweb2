@@ -2,7 +2,7 @@
 
 
 require_once 'Api.php';
-require_once './../model/CategoriaModel.php';
+require_once './../model/ComentariosModel.php';
 class CategoriaApiController extends Api
 {
   private $model;
@@ -10,17 +10,17 @@ class CategoriaApiController extends Api
   function __construct()
   {
     parent::__construct();
-    $this->model = new CategoriaModel();
+    $this->model = new ComentariosModel();
   }
 
-  function GetCategorias($param = null)
+  function GetComentarios($param = null)
   {
     if(isset($param)){
-      $id_categoria = $param[0];
-      $data = $this->model->GetCategoria($id_categoria);
+      $id_comentario = $param[0];
+      $data = $this->model->GetComentario($id_comentario);
 
     }else{
-      $data = $this->model->GetCategorias();
+      $data = $this->model->GetComentarios();
     }
     if($data == true){
       return $this->json_response($data, 200);
@@ -29,22 +29,22 @@ class CategoriaApiController extends Api
     }
   }
 
-  function DeleteCategoria($param = null){
+  function BorrarComentario($param = null){
     if(count($param) == 1){
-      $id_categoria = $param[0];
-     $r =  $this->model->BorrarCategoria($id_categoria);
+      $id_comentario = $param[0];
+     $r =  $this->model->BorrarComentario($id_comentario);
      if($r == false){
        return $this->json_response($r,300);
      }
       return $this->json_response($r,200);
       }else{
-      return $this->json_response("Categoria no especificada",300);
+      return $this->json_response("Comentario no encontrado",300);
     }
   }
 
-  function InsertarCategoria($param = null){
+  function InsertarComentario($param = null){
     $arreglo = $this->getJSONData();
-    $r = $this->model->InsertarCategoria($arreglo->Indumentaria);
+    $r = $this->model->InsertarComentario($arreglo->Indumentaria);
      return $this->json_response($r,200);
 
   }

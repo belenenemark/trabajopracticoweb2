@@ -25,7 +25,6 @@ class CategoriaModel
   }
 
   function GetCategoria($idcategoria){
-
       $sentencia = $this->db->prepare( "SELECT * from categoria where idcategoria=?");
       $sentencia->execute(array($idcategoria));
       return $sentencia->fetch(PDO::FETCH_ASSOC);
@@ -34,12 +33,17 @@ class CategoriaModel
 
     $sentencia = $this->db->prepare("INSERT INTO categoria(indumentaria) VALUES(?)");
     $sentencia->execute(array($indumentaria));
+    $lastId = $this->db->lastInsertId();
+    return $this->GetCategoria($lastId);
   }
 
   function BorrarCategoria($idcategoria){
-
-    $sentencia = $this->db->prepare( "DELETE from categoria where idcategoria=?");
-    $sentencia->execute(array($idcategoria));
+    $categoria = $this->GetCategoria($idcategoria);
+    if(isset($categoria)){
+      $sentencia = $this->db->prepare( "DELETE from categoria where idcategoria=?");
+      $sentencia->execute(array($idcategoria));
+      return $categoria;
+    }
   }
 
   function EditarCategoria($indumentaria,$idcategoria){

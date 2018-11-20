@@ -20,7 +20,7 @@ class ComentariosModel
     $sentencia = $this->db->prepare("INSERT INTO comentarios(comentario,valoracion,idusuario,idproducto) VALUES(?,?,?,?)");
     $sentencia->execute(array($comentario,$valoracion,$idusuario,$idproducto));
     $lastId = $this->db->lastInsertId();
-    return $this->GetCategoria($lastId);
+    return $this->GetComentario($lastId);
   }
 
   function GetComentarios(){

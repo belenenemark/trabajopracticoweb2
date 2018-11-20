@@ -44,7 +44,7 @@ class ComentariosApiController extends Api
 
   function InsertarComentario($param = null){
     $arreglo = $this->getJSONData();
-    $r = $this->model->InsertarComentario($arreglo->Indumentaria);
+    $r = $this->model->InsertarComentario($arreglo->Comentario,$arreglo->Valoracion,$arreglo->Idusuario,$arreglo->Idproducto);
      return $this->json_response($r,200);
 
   }

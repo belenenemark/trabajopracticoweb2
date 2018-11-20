@@ -5,7 +5,7 @@
 class ComentariosModel
 {
   private $db;
-  function __construct(argument)
+  function __construct()
   {
     $this->db = $this->Connect();
 
@@ -20,7 +20,7 @@ class ComentariosModel
     $sentencia = $this->db->prepare("INSERT INTO comentarios(comentario,valoracion,idusuario,idproducto) VALUES(?,?,?,?)");
     $sentencia->execute(array($comentario,$valoracion,$idusuario,$idproducto));
     $lastId = $this->db->lastInsertId();
-    return $this->GetCategoria($lastId);
+    return $this->GetComentario($lastId);
   }
 
   function GetComentarios(){
@@ -36,9 +36,9 @@ class ComentariosModel
   }
 
   function BorrarComentario($idcomentario){
-    $comentario = $this->GetCategoria($idcomentario);
+    $comentario = $this->GetComentario($idcomentario);
     if(isset($comentario)){
-      $sentencia = $this->db->prepare( "DELETE from from comentarios where idcomentario=?");
+      $sentencia = $this->db->prepare( "DELETE from  comentarios where idcomentario=?");
       $sentencia->execute(array($idcomentario));
       return $comentario;
     }

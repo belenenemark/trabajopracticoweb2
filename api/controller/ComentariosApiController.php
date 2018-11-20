@@ -3,7 +3,7 @@
 
 require_once 'Api.php';
 require_once './../model/ComentariosModel.php';
-class CategoriaApiController extends Api
+class ComentariosApiController extends Api
 {
   private $model;
 

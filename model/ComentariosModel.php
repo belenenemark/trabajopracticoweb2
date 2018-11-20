@@ -5,7 +5,7 @@
 class ComentariosModel
 {
   private $db;
-  function __construct(argument)
+  function __construct()
   {
     $this->db = $this->Connect();
 

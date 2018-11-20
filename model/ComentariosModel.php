@@ -36,9 +36,9 @@ class ComentariosModel
   }
 
   function BorrarComentario($idcomentario){
-    $comentario = $this->GetCategoria($idcomentario);
+    $comentario = $this->GetComentario($idcomentario);
     if(isset($comentario)){
-      $sentencia = $this->db->prepare( "DELETE from from comentarios where idcomentario=?");
+      $sentencia = $this->db->prepare( "DELETE from  comentarios where idcomentario=?");
       $sentencia->execute(array($idcomentario));
       return $comentario;
     }

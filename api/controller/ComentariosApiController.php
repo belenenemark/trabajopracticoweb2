@@ -22,6 +22,8 @@ class ComentariosApiController extends Api
     }else{
       $data = $this->model->GetComentarios();
     }
+
+    var_dump($this->json_response(null, 404));
     if($data == true){
       return $this->json_response($data, 200);
     }else{

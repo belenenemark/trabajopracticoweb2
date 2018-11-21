@@ -1,5 +1,7 @@
 {include file="header.tpl"}
+<div id="comentarios-container">
 
+</div>
 
 <div class="col-sm-offset-2 col-sm-8">
           <h1>{$Titulo}</h1>
@@ -32,8 +34,10 @@
           {/if}
         </div>
         {/foreach}
+
     </div>
 
 </div>
+
 
 {include file="footer.tpl"}

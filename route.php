@@ -25,7 +25,7 @@ if(isset($_GET['action'])){
     $action = $urlData[ConfigApp::$ACTION]; //home
     if(array_key_exists($action,ConfigApp::$ACTIONS)){
         $params = $urlData[ConfigApp::$PARAMS];
-        $action = explode('#',ConfigApp::$ACTIONS[$action]); 
+        $action = explode('#',ConfigApp::$ACTIONS[$action]);
         $controller =  new $action[0]();
         $metodo = $action[1];
         if(isset($params) &&  $params != null){

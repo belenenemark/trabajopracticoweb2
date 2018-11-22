@@ -13,17 +13,10 @@ class ComentariosApiController extends Api
     $this->model = new ComentariosModel();
   }
 
-  function GetComentarios($param = null)
+  function GetComentarios($param)
   {
-    if(isset($param)){
-      $id_comentario = $param[0];
-      $data = $this->model->GetComentario($id_comentario);
 
-    }else{
-      $data = $this->model->GetComentarios();
-    }
-
-  
+    $data = $this->model->GetComentarios($param[0]);
     if($data == true){
       return $this->json_response($data, 200);
     }else{
@@ -46,7 +39,7 @@ class ComentariosApiController extends Api
 
   function InsertarComentario($param = null){
     $arreglo = $this->getJSONData();
-    $r = $this->model->InsertarComentario($arreglo->Comentario,$arreglo->Valoracion,$arreglo->Idusuario,$arreglo->Idproducto);
+    $r = $this->model->InsertarComentario($arreglo->comentario,$arreglo->valoracion,$arreglo->idusuario,$arreglo->idproducto);
      return $this->json_response($r,200);
 
   }

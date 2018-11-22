@@ -29,12 +29,15 @@ class ProductosView
     $this->Smarty->assign('Logeado',$sesion);
     $this->Smarty->display('templates/listarProductos.tpl');
   }
-  function MostrarProducto($Titulo, $Producto,$sesion,$imagenes){
-
+  function MostrarProducto($Titulo, $Producto,$sesion,$imagenes,$user){
+    var_dump($user);
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Producto',$Producto);
     $this->Smarty->assign('Logeado',$sesion);
     $this->Smarty->assign('Imagenes',$imagenes);
+    $this->Smarty->assign('Usuario',$user);
+
+
     $this->Smarty->display('templates/listarxProducto.tpl');
   }
   function MostrarProductoxCat($Titulo, $Productos,$sesion){

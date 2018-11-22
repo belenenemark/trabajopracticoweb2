@@ -3,5 +3,5 @@
  {{#each comentarios}}
  <p>{{comentario}}  </p>
  <p>La valoracion de este comentario es:{{valoracion}} </p>
- <a href="borrar/{{idcomentario}}">Borrar Comentario</a></li>
+ <p class="text-center"><button type="button" id="deleteComment" class="btn btn-primary deleteComment" data-id="{{id_comentario}}">Borrar Comentario</button> </p>
 {{/each}}

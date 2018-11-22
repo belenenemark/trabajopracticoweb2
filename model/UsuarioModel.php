@@ -34,7 +34,7 @@ class UsuarioModel
 
       $sentencia = $this->db->prepare( "select * from usuario where nombre=? limit 1");
       $sentencia->execute(array($user));
-      return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+      return $sentencia->fetch(PDO::FETCH_ASSOC);
   }
 
 }

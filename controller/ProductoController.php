@@ -3,6 +3,7 @@ require_once  "./view/ProductosView.php";
 require_once  "./model/ProductoModel.php";
 require_once  "./model/CategoriaModel.php";
 require_once 'SecuredController.php';
+require_once './model/UsuarioModel.php';
 
 /**
  *
@@ -13,6 +14,7 @@ class ProductoController extends SecuredController
   private $view;
   private $model;
   private $modelCat;
+  private $modelUser;
   private $Titulo;
   private $sesion;
 
@@ -22,6 +24,7 @@ class ProductoController extends SecuredController
     $this->view = new ProductosView();
     $this->model = new ProductoModel();
     $this->modelCat= new CategoriaModel();
+    $this->modelUser= new UsuarioModel();
     $this->Titulo = "Lista de Ropa";
     $this->esta=false;
     if(isset($_SESSION["User"])){
@@ -41,8 +44,8 @@ class ProductoController extends SecuredController
         $tit=$this->Titulo='Producto Individual';
         $Producto = $this->model->GetProducto($id);
         $imagenes=$this->model->GetImagenes($id);
-
-        $this->view->MostrarProducto($tit, $Producto,$this->sesion,$imagenes);
+        $user= $this->modelUser->GetUser($_SESSION["User"]);
+        $this->view->MostrarProducto($tit, $Producto,$this->sesion,$imagenes,$user);
 
 
 

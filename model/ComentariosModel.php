@@ -23,9 +23,9 @@ class ComentariosModel
     return $this->GetComentario($lastId);
   }
 
-  function GetComentarios(){
-    $sentencia = $this->db->prepare( "SELECT * from comentarios");
-    $sentencia->execute();
+  function GetComentarios($idproducto){
+    $sentencia = $this->db->prepare( "SELECT * from comentarios where idproducto=?");
+    $sentencia->execute(array($idproducto));
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 

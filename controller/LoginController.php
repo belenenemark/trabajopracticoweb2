@@ -47,7 +47,7 @@ class LoginController
 
       if( (isset($dbUser))&&($dbUser!=NULL )){
 
-          if (password_verify($pass,$dbUser[0]['clave'])){
+          if (password_verify($pass,$dbUser['clave'])){
               session_start();
               $_SESSION["User"] = $userData;
 

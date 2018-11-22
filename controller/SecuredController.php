@@ -25,6 +25,8 @@ class SecuredController
     header(LOGIN);
   }
 
+  
+
 }
 
  ?>

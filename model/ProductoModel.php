@@ -31,19 +31,21 @@ function GetImagenes($idproducto){
   $sentencia->execute(array($idproducto));
   return  $sentencia->fetchAll(PDO::FETCH_ASSOC);
 }
-function InsertarProducto($nombre,$precio,$categoria,$imagenes){
+function InsertarProducto($nombre,$precio,$categoria,$imagenes=null){
 
     $sentencia = $this->db->prepare("INSERT INTO producto (nombre, precio,idcategoria) VALUES(?,?,?)");
     $sentencia->execute(array($nombre,$precio,$categoria));
     $idproducto=$this->db->lastInsertId();
-    $rutas = $this->subirImagenes($imagenes);
-    $sentencia_img=$this->db->prepare('INSERT INTO imagenes(idproducto,nombre) VALUES(?,?)');
-    foreach ($rutas as $ruta) {
-      $sentencia_img->execute([$idproducto,$ruta]);
+    if($imagenes!=null){
+      $rutas = $this->subirImagenes($imagenes);
+      $sentencia_img=$this->db->prepare('INSERT INTO imagenes(idproducto,nombre) VALUES(?,?)');
+      foreach ($rutas as $ruta) {
+        $sentencia_img->execute([$idproducto,$ruta]);
+      }
     }
+
   }
   function BorrarProducto($idproducto){
-
     $sentencia = $this->db->prepare( "DELETE from producto where idproducto=?");
     $sentencia->execute(array($idproducto));
   }

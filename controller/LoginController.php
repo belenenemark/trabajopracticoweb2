@@ -11,6 +11,7 @@ class LoginController
   private $model;
   private $Titulo;
   private $sesion;
+  private $admin;
 
 
   function __construct()
@@ -24,12 +25,17 @@ class LoginController
         }  else {
           $this->sesion=false;
         }
+        if(isset($_SESSION["admin"])){
+            $this->admin =true;
+            }  else {
+              $this->admin=false;
+            }
 
   }
 
   function login(){
 
-    $this->view->mostrarLogin(' ', $this->sesion);
+    $this->view->mostrarLogin(' ', $this->sesion,$this->admin);
 
   }
 
@@ -50,16 +56,17 @@ class LoginController
           if (password_verify($pass,$dbUser['clave'])){
               session_start();
               $_SESSION["User"] = $userData;
-
+              $_SESSION["admin"] = $dbUser['admin'];
+              var_dump($_SESSION['admin']);
               header(HOME);
           }else{
-            $this->view->mostrarLogin("Contraseña invalida",$this->sesion);
+            $this->view->mostrarLogin("Contraseña invalida",$this->sesion,$_SESSION["admin"]);
 
           }
 
       }else{
         //No existe el usario
-        $this->view->mostrarLogin("No existe el usuario",$this->sesion);
+        $this->view->mostrarLogin("No existe el usuario",$this->sesion,$_SESSION["admin"]);
       }
 
   }

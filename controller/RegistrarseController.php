@@ -24,7 +24,7 @@ class RegistrarseController
   }
   function signin(){
 
-    $this->view->mostrarSignIn('',$this->sesion);
+    $this->view->mostrarSignIn('',$this->sesion,$_SESSION["admin"]);
 
   }
 
@@ -35,14 +35,14 @@ class RegistrarseController
       $dbUser = $this->model->getUser($user);
 
       if($dbUser==$user){
-          $this->view->mostrarSignIn("Existe el usuario",$this->sesion);
+          $this->view->mostrarSignIn("Existe el usuario",$this->sesion,$_SESSION["admin"]);
       }else{
         if($pass==$pass2){
           $this->model->InsertarUsuario($user,$pass);
-            $this->view->mostrarSignIn("Su registro ha sido realizado correctamente",$this->sesion);
+            $this->view->mostrarSignIn("Su registro ha sido realizado correctamente",$this->sesion,$_SESSION["admin"]);
 
         }else {
-            $this->view->mostrarSignIn("Las password no son iguales",$this->sesion);
+            $this->view->mostrarSignIn("Las password no son iguales",$this->sesion,$_SESSION["admin"]);
         }
 
       }

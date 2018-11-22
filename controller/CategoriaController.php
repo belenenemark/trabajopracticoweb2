@@ -11,7 +11,7 @@ class CategoriaController extends SecuredController
  private $model;
   private $Titulo;
   private $sesion;
-
+  private $admin;
   function __construct()
   {
     parent::__construct();
@@ -23,15 +23,20 @@ class CategoriaController extends SecuredController
        }  else {
          $this->sesion=false;
        }
+       if(isset($_SESSION["admin"])){
+           $this->admin =true;
+           }  else {
+             $this->admin=false;
+           }
   }
 
   function Home(){
 
       $Categorias = $this->model->GetCategorias();
       if($this->sesion){
-        $this->view->Mostrar($this->Titulo, $Categorias,$this->sesion);
+        $this->view->Mostrar($this->Titulo, $Categorias,$this->sesion,$this->admin);
       }else {
-        $this->view->MostrarPublico($this->Titulo,$Categorias,$this->sesion );
+        $this->view->MostrarPublico($this->Titulo,$Categorias,$this->sesion,$this->admin);
       }
 
   }
@@ -42,7 +47,7 @@ class CategoriaController extends SecuredController
     $id_categoria = $param[0];
 
     $Categoria = $this->model->GetCategoria($id_categoria);
-    $this->view->editCategoria("Editar Categoria",$Categoria,$this->sesion);
+    $this->view->editCategoria("Editar Categoria",$Categoria,$this->sesion,$this->admin);
   }
   }
 

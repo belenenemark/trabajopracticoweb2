@@ -10,55 +10,50 @@ class ProductosView
   function __construct()
   {
     $this->Smarty = new Smarty();
-    $this->Smarty = new Smarty();
 
 
   }
-  function prueba($tabla){
 
-    $this->Smarty->assign('tabla',$tabla);
-    $this->Smarty->display('templates/prueba.tpl');
 
-  }
-
-  function Mostrar($Titulo, $Productos,$sesion,$Categorias){
+  function Mostrar($Titulo, $Productos,$sesion,$Categorias,$admin){
+    var_dump($admin);
 
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Productos',$Productos);
     $this->Smarty->assign('Categorias',$Categorias);
     $this->Smarty->assign('Logeado',$sesion);
+    $this->Smarty->assign('Admin',$admin);
     $this->Smarty->display('templates/listarProductos.tpl');
   }
-  function MostrarProducto($Titulo, $Producto,$sesion,$imagenes,$user){
-    var_dump($user);
+  function MostrarProducto($Titulo, $Producto,$sesion,$imagenes,$user,$admin){
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Producto',$Producto);
     $this->Smarty->assign('Logeado',$sesion);
     $this->Smarty->assign('Imagenes',$imagenes);
+    $this->Smarty->assign('Admin',$admin);
     $this->Smarty->assign('Usuario',$user);
 
 
     $this->Smarty->display('templates/listarxProducto.tpl');
   }
-  function MostrarProductoxCat($Titulo, $Productos,$sesion){
+  function MostrarProductoxCat($Titulo, $Productos,$sesion,$admin){
 
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Productos',$Productos);
     $this->Smarty->assign('Logeado',$sesion);
+    $this->Smarty->assign('Admin',$admin);
     $this->Smarty->display('templates/filtrado.tpl');
   }
-  function editProducto($Titulo, $Productos,$Categorias,$sesion){
+  function editProducto($Titulo, $Productos,$Categorias,$sesion,$admin){
 
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Producto',$Productos);
     $this->Smarty->assign('Categorias',$Categorias);
     $this->Smarty->assign('Logeado',$sesion);
+    $this->Smarty->assign('Admin',$admin);
     $this->Smarty->display('templates/editarProducto.tpl');
   }
-  function mostrarCrearImg(){
-    $this->Smarty->display('templates/pruebaimagen.tpl');
 
-  }
   function errorCarga($dato){
     $this->Smarty->assign('dato',$dato);
       $this->Smarty->display('templates/error.tpl');

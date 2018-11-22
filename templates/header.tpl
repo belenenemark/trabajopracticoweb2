@@ -50,6 +50,7 @@
                     <li><a href='login'><i class="glyphicon glyphicon-off"></i> Log in</a></li>
                     <li><a href='signin'><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
                     {/if}
+
 									</ul>
 								</li>
 							</ul>
@@ -75,6 +76,9 @@
                 <li><a href='home'>Categorias</a></li><!-- aca el ref a smarty-->
                 <li><a href='productos'>Productos</a></li>
 								<li><a href="#">Contact</a></li>
+                {if $Admin}
+                <li><a href='mostrarUsuarios'><i class="glyphicon glyphicon-off"></i> Usuarios</a></li>
+                {/if}
 							</ul>
 							<ul class="navbar_user">
                 {if $Logeado}

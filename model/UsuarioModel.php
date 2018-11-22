@@ -19,7 +19,7 @@ class UsuarioModel
 
   function GetUsuarios(){
 
-      $sentencia = $this->db->prepare( "select * from usuario");
+      $sentencia = $this->db->prepare( "SELECT * from usuario");
       $sentencia->execute();
       return $sentencia->fetchAll(PDO::FETCH_ASSOC); //modification
   }
@@ -32,9 +32,18 @@ class UsuarioModel
 
   function GetUser($user){
 
-      $sentencia = $this->db->prepare( "select * from usuario where nombre=? limit 1");
+      $sentencia = $this->db->prepare( "SELECT * from usuario where nombre=? limit 1");
       $sentencia->execute(array($user));
       return $sentencia->fetch(PDO::FETCH_ASSOC);
+  }
+  function BorrarUsuario($idusuario){
+
+    $sentencia = $this->db->prepare( "DELETE from usuario where idusuario=?");
+    $sentencia->execute(array($idusuario));
+  }
+  function EditarProducto($idusuario,$admin){
+    $sentencia = $this->db->prepare( "UPDATE producto set admin = ? where idusuario=?");
+      $sentencia->execute(array($admin));
   }
 
 }

@@ -29,6 +29,10 @@ function mostrarComentarios(jsonComentarios) {
     let html = templateComentarios(context);
     console.log(html);
     document.querySelector("#comentarios-container").innerHTML = html;
+    $('.deleteComment').bind("click", function(event){
+      let data = $(this).data("id");
+      deleteComment(data);
+    });
 }
 $('#submitComment').click(function(){ //Cuando clickeas en el boton "Submit" que tiene el ID '#submitcomment', entra.
         event.preventDefault(); //Previene que se actualice la página (que redireccione).
@@ -38,7 +42,7 @@ $('#submitComment').click(function(){ //Cuando clickeas en el boton "Submit" que
         "idusuario": $('#idusuario').val(), //ID del juego al que pernetece el comentario.
         "idproducto": $('#idproducto').val() //ID del usuario que hizo el comentario.
         }
-        console.log(comentario); //Imprimo un LOG con el JSON de datos ingresados por el usuario.
+       //Imprimo un LOG con el JSON de datos ingresados por el usuario.
         fetch("api/comentarios", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},

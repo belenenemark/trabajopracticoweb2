@@ -1,7 +1,8 @@
 <h2>{{prueba}}</h2>
 
  {{#each comentarios}}
- <p>{{comentario}}  </p>
+ <p> Comentario de <b>{{nombre}}</b></p>
+ <p>Comentario:{{comentario}} </p>
  <p>La valoracion de este comentario es:{{valoracion}} </p>
- <p class="text-center"><button type="button" id="deleteComment" class="btn btn-primary deleteComment" data-id="{{id_comentario}}">Borrar Comentario</button> </p>
+ <p class="text-center"><button type="button" id="deleteComment" class="btn btn-primary deleteComment" data-id="{{idcomentario}}">Borrar Comentario</button> </p>
 {{/each}}

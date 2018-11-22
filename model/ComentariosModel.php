@@ -24,7 +24,7 @@ class ComentariosModel
   }
 
   function GetComentarios($idproducto){
-    $sentencia = $this->db->prepare( "SELECT * from comentarios where idproducto=?");
+    $sentencia = $this->db->prepare( "SELECT comentarios.idcomentario,comentarios.comentario,comentarios.valoracion,comentarios.idusuario,usuario.nombre from comentarios INNER JOIN usuario on comentarios.idusuario=usuario.idusuario where idproducto=?");
     $sentencia->execute(array($idproducto));
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }

@@ -44,29 +44,28 @@ function mostrarComentarios(jsonComentarios,admin) {
       deleteComment(data);
     });
 }
-$('#submitComment').click(function(){ //Cuando clickeas en el boton "Submit" que tiene el ID '#submitcomment', entra.
-        event.preventDefault(); //Previene que se actualice la página (que redireccione).
+$('#submitComment').click(function(){
+        event.preventDefault();
         let comentario = {
-        "comentario": $('#commentText').val(), //Texto, comentario, tu opinion sobre el juego.
-        "valoracion": $('#puntaje').val(), //Punta (entre 1 y 5) con el que se valora al juego.
-        "idusuario": $('#idusuario').val(), //ID del juego al que pernetece el comentario.
-        "idproducto": $('#idproducto').val() //ID del usuario que hizo el comentario.
+        "comentario": $('#commentText').val(),
+        "valoracion": $('#puntaje').val(),
+        "idusuario": $('#idusuario').val(),
+        "idproducto": $('#idproducto').val()
         }
-       //Imprimo un LOG con el JSON de datos ingresados por el usuario.
         fetch("api/comentarios", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(comentario)
         })
-        .then(r => getComentarios()) //Si el POST tiene éxito, llama a una función de arriba que trae TODOS los comentarios y los muestra.
-        .catch(error => console.log("error")); //Si el post falla, imprime un log con el error.
+        .then(r => getComentarios())
+        .catch(error => console.log("error"));
       });
 
-      function deleteComment(data){ //Cuando clickeas en el boton "Submit" que tiene el ID '#deleteComment', entra.
-        event.preventDefault(); //Previene que se actualice la página (que redireccione).
+      function deleteComment(data){
+        event.preventDefault();
         fetch("api/comentarios/"+ data, {
           method: 'DELETE',
         })
-        .then(r => getComentarios()) //Si el POST tiene éxito, llama a una función de arriba que trae TODOS los comentarios y los muestra.
-        .catch(error => console.log("error")); //Si el post falla, imprime un log con el error.
+        .then(r => getComentarios())
+        .catch(error => console.log("error"));
       }

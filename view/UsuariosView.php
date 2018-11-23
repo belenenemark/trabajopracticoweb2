@@ -21,7 +21,3 @@ class UsuariosView
 
   }
 }
-
-
-
- ?>

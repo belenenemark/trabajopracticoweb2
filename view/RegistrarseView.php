@@ -19,5 +19,3 @@ class RegistrarseView
     $this->Smarty->display('templates/registrarse.tpl');
   }
 }
-
- ?>

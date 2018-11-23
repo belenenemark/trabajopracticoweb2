@@ -42,4 +42,3 @@ class CategoriasView
     $this->Smarty->display('templates/editarCategoria.tpl');
   }
 }
-?>

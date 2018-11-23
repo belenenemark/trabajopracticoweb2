@@ -55,7 +55,7 @@ function InsertarProducto($nombre,$precio,$categoria,$imagenes=null){
   }
   function EditarProducto($idproducto,$nombre,$precio,$categoria,$imagenes=null){
     echo 'entro al model';
-    
+
 
     $sentencia = $this->db->prepare( "UPDATE producto set nombre = ?, precio = ?, idcategoria = ? where idproducto=?");
     $sentencia->execute(array($nombre,$precio,$categoria,$idproducto));
@@ -97,8 +97,3 @@ function InsertarProducto($nombre,$precio,$categoria,$imagenes=null){
 
 
 }
-
-
-
-
- ?>

@@ -51,4 +51,3 @@ class CategoriaModel
     $sentencia->execute(array($indumentaria,$idcategoria));
   }
 }
-?>

@@ -20,5 +20,3 @@ class LoginView
     $this->Smarty->display('templates/login.tpl');
   }
 }
-
- ?>

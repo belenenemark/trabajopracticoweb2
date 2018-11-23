@@ -23,11 +23,16 @@ class CategoriaController extends SecuredController
        }  else {
          $this->sesion=false;
        }
+
        if(isset($_SESSION["admin"])){
+         if($_SESSION["admin"] == 1){
            $this->admin =true;
-           }  else {
-             $this->admin=false;
-           }
+         }else{
+           $this->admin =false;
+          }
+        }else{
+          $this->admin =false;
+        }
   }
 
   function Home(){

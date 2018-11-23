@@ -34,11 +34,14 @@ class ProductoController extends SecuredController
           $this->sesion=false;
         }
         if(isset($_SESSION["admin"])){
+          if($_SESSION["admin"] == 1){
             $this->admin =true;
-            var_dump($this->admin);
-            }  else {
-              $this->admin=false;
-            }
+          }else{
+            $this->admin =false;
+           }
+         }else{
+           $this->admin =false;
+         }
   }
 
   function ProductosTodos(){
@@ -51,7 +54,11 @@ class ProductoController extends SecuredController
         $tit=$this->Titulo='Producto Individual';
         $Producto = $this->model->GetProducto($id);
         $imagenes=$this->model->GetImagenes($id);
-        $user= $this->modelUser->GetUser($_SESSION["User"]);
+        if(isset($_SESSION["User"]) ){
+          $user= $this->modelUser->GetUser($_SESSION["User"]);
+        }else{
+          $user=null;
+        }
         $this->view->MostrarProducto($tit, $Producto,$this->sesion,$imagenes,$user,$this->admin);
 
 

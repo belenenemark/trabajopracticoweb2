@@ -25,7 +25,7 @@ class ProductosView
     $this->Smarty->assign('Admin',$admin);
     $this->Smarty->display('templates/listarProductos.tpl');
   }
-  function MostrarProducto($Titulo, $Producto,$sesion,$imagenes,$user,$admin){
+  function MostrarProducto($Titulo, $Producto,$sesion,$imagenes,$user=null,$admin){
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Producto',$Producto);
     $this->Smarty->assign('Logeado',$sesion);

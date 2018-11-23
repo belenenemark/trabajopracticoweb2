@@ -16,18 +16,28 @@ function getComentarios() {
     fetch("api/comentarios/"+valor)
     .then(response => response.json())
     .then(jsonComentarios => {
-       mostrarComentarios(jsonComentarios);
+      let adminSmarty=  $('#admin').val();
+      let admin;
+      if(adminSmarty=="1"){
+         admin=true;
+      }else {
+         admin=false;
+      }
+       mostrarComentarios(jsonComentarios,admin);
     })
 
 }
-function mostrarComentarios(jsonComentarios) {
+function mostrarComentarios(jsonComentarios,admin) {
+
+    console.log(admin);
     let context = { // como el assign de smarty
         comentarios: jsonComentarios,
-        prueba: "hola"
+        prueba: "comentarios",
+        administrador:admin
     }
 
     let html = templateComentarios(context);
-    console.log(html);
+
     document.querySelector("#comentarios-container").innerHTML = html;
     $('.deleteComment').bind("click", function(event){
       let data = $(this).data("id");

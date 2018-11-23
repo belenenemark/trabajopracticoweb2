@@ -39,7 +39,9 @@
                   <h2>Comentarios y valoraciones del producto</h2>
 
                   <!-- ID USUARIO -->
+                  {if $Logeado}
                   <input type="" class="form-control" id="idusuario" value="{$Usuario['idusuario']}"></input>
+                  {/if}
 
                     <!-- Paso el producto -->
                       <input type="hidden" class="form-control" id="idproducto" value="{$Producto['idproducto']}"></input>
@@ -64,6 +66,7 @@
                     <button type="submit" id="submitComment" class="btn btn-primary">Submit</button>
                 </form>
     {/if}
+      <input type="hidden" class="form-control" id="admin" value="{$Admin}"></input>
     <div id="comentarios-container"value="{$Producto['idproducto']}">
 
     </div>

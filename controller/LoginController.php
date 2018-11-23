@@ -26,10 +26,14 @@ class LoginController
           $this->sesion=false;
         }
         if(isset($_SESSION["admin"])){
+          if($_SESSION["admin"] == 1){
             $this->admin =true;
-            }  else {
-              $this->admin=false;
-            }
+          }else{
+            $this->admin =false;
+           }
+         }else{
+           $this->admin =false;
+         }
 
   }
 
@@ -60,13 +64,13 @@ class LoginController
               var_dump($_SESSION['admin']);
               header(HOME);
           }else{
-            $this->view->mostrarLogin("Contraseña invalida",$this->sesion,$_SESSION["admin"]);
+            $this->view->mostrarLogin("Contraseña invalida",$this->sesion,$this->admin);
 
           }
 
       }else{
         //No existe el usario
-        $this->view->mostrarLogin("No existe el usuario",$this->sesion,$_SESSION["admin"]);
+        $this->view->mostrarLogin("No existe el usuario",$this->sesion,$this->admin);
       }
 
   }

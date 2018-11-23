@@ -41,9 +41,9 @@ class UsuarioModel
     $sentencia = $this->db->prepare( "DELETE from usuario where idusuario=?");
     $sentencia->execute(array($idusuario));
   }
-  function EditarProducto($idusuario,$admin){
-    $sentencia = $this->db->prepare( "UPDATE producto set admin = ? where idusuario=?");
-      $sentencia->execute(array($admin));
+  function EditarUsuario($idusuario,$admin){
+    $sentencia = $this->db->prepare( "UPDATE usuario set admin = ? where idusuario=?");
+      $sentencia->execute(array($admin,$idusuario));
   }
 
 }

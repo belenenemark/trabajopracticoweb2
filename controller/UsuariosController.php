@@ -48,10 +48,10 @@ class UsuariosController extends SecuredController
   }
   function aumentarCategoria($param){
     if($this->admin){
-      $idusuario = $_POST["idusuario"];
-      $admin = $_POST["admin"];
+      $idusuario = $param[0];
+      $admin = 1;
 
-      $this->model->EditarCategoria($idusuario,$admin);
+      $this->model->EditarUsuario($idusuario,$admin);
       header(USER);
     }
 

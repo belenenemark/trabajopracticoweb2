@@ -18,7 +18,7 @@ class CategoriasView
   }
 
   function Mostrar($Titulo,$Categorias,$sesion,$admin){
-    var_dump($admin);
+    
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Categorias',$Categorias);
     $this->Smarty->assign('Logeado',$sesion);

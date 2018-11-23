@@ -29,7 +29,6 @@ function getComentarios() {
 }
 function mostrarComentarios(jsonComentarios,admin) {
 
-    console.log(admin);
     let context = { // como el assign de smarty
         comentarios: jsonComentarios,
         prueba: "comentarios",

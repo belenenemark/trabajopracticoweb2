@@ -16,7 +16,7 @@ class ProductosView
 
 
   function Mostrar($Titulo, $Productos,$sesion,$Categorias,$admin){
-    var_dump($admin);
+
 
     $this->Smarty->assign('Titulo',$Titulo);
     $this->Smarty->assign('Productos',$Productos);

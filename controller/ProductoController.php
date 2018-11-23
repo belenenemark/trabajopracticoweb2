@@ -98,13 +98,32 @@ class ProductoController extends SecuredController
 
   }
 
-  function guardarProducto($param){
+  function guardarProducto(){
     if($this->sesion){
       $id = $_POST["idProducto"];
       $nombre = $_POST["nombre"];
       $precio = $_POST["precio"];
       $idcategoria = $_POST["categoria"];
-      $this->model->EditarProducto($id,$nombre,$precio,$idcategoria,$this->admin);
+      if(isset($_FILES['imagenes']['name'])){
+        $rutas=$_FILES['imagenes']['name'];
+      }else {
+        $rutas=null;
+      }
+
+      if($this->admin){
+        echo 'entra al if de admin';
+        if($this->sonJPG($rutas)){
+          echo 'entra al if de sonJPG';
+          $rutaTempImagenes=$_FILES['imagenes']['tmp_name'];
+          $this->model->EditarProducto($id,$nombre,$precio,$idcategoria,$rutaTempImagenes);
+
+        }else {
+          $this->view->errorCarga("la imagen no fue cargada");
+        }
+      }else {
+        echo 'entra al else de admin';
+      $this->model->EditarProducto($id,$nombre,$precio,$idcategoria,null);
+      }
     }
 
     header(PROD);

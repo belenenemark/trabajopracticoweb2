@@ -27,7 +27,7 @@
         {foreach from=$Imagenes item=imagen}
         <div class="imagenesProd">
           <img src="{$imagen['nombre']}" alt="">
-          {if $Logeado}
+          {if $Admin}
             <a href="borrarImagen/{$imagen['id_image']}">Borrar Imagen</a>
           {/if}
         </div>
@@ -40,7 +40,7 @@
 
                   <!-- ID USUARIO -->
                   {if $Logeado}
-                  <input type="" class="form-control" id="idusuario" value="{$Usuario['idusuario']}"></input>
+                  <input type="hidden" class="form-control" id="idusuario" value="{$Usuario['idusuario']}"></input>
                   {/if}
 
                     <!-- Paso el producto -->

@@ -6,18 +6,25 @@
 
 <div class="container">
 
-<form method="post" action="guardarEditar"  >
+<form method="post" action="guardarEditar" enctype="multipart/form-data">
   <input type="hidden" class="form-control" id="idForm" name="idProducto" value="{$Producto["idproducto"]}">
   <div class="form-group">
 
     <input type="text" class="form-control" id="nombre" name="nombre" value="{$Producto["nombre"]}">
   </div>
+  {if $Admin}
+  <div class="form-group">
+    <label for="imagen">Imagen</label>
+    <input type="file" id="imagenes" name="imagenes[]" multiple>
+  </div>
+  {/if}
   <div class="form-group">
     <label for="descripcionForm">Descripcion</label>
     <input type="text" class="form-control" id="precio" name="precio" value="{$Producto["precio"]}">
   </div>
 
-  <div class="input-group mb-3">
+
+<div class="input-group mb-3">
 <div class="input-group-prepend">
 <label class="input-group-text" for="inputGroupSelect01">Options</label>
 
@@ -31,6 +38,7 @@
 </select>
 </div>
 </div>
+
 
   <button type="submit" class="btn btn-primary">Editar producto</button>
 </form>

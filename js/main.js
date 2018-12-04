@@ -43,7 +43,7 @@ function mostrarComentarios(jsonComentarios,admin) {
       deleteComment(data);
     });
 }
-$('#submitComment').click(function(){
+$('#submitComment').click(function(event){
         event.preventDefault();
         let comentario = {
         "comentario": $('#commentText').val(),
